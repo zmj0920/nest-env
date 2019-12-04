@@ -1,8 +1,8 @@
 import { Get, Controller, Post, Response, Param, HttpStatus, Request, Body } from '@nestjs/common';
 import { UserService } from './user.service';
-import { User } from '../../entities/user.entity';
+import { User } from '../entities/user.entity';
 
-@Controller('employee')
+@Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService) { }
 
@@ -35,9 +35,9 @@ export class UserController {
         console.log('1323');
         return this.userService.create();
     }
-    //get
-    //http://localhost:4000/users?age=10&name=hello
-    //http://localhost:4000/users/2
+    // get
+    // http://localhost:4000/users?age=10&name=hello
+    // http://localhost:4000/users/2
     // @Post('/add')
     // addUser1(@Response() res, @Body() user) {
     //   console.log(user);
