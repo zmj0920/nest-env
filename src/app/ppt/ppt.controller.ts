@@ -3,6 +3,9 @@ import { PPTService } from './ppt.service';
 import { PPT } from '../entities/ppt.entity';
 import { join } from 'path';
 import {FileFieldsInterceptor, FileInterceptor} from '@nestjs/platform-express';
+import { ApiTags } from '@nestjs/swagger';
+
+@ApiTags('PPT模板')
 @Controller('ppt')
 export class PPTController {
     constructor(private readonly pptService: PPTService) { }

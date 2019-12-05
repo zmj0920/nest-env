@@ -20,14 +20,17 @@ import * as multer from 'multer';
 import { extname } from 'path';
 import { existsSync, mkdirSync } from 'fs';
 
+import { ApiTags } from '@nestjs/swagger';
+
+@ApiTags('图片')
 @Controller('img')
 export class ImgController {
-    img1:any;
-    imgurl:any;
+    img1: any;
+    imgurl: any;
     constructor(private readonly imgService: ImgService) { }
     @Get('findOne/:name')
     async findOne(@Param() params): Promise<IMG> {
-        let result = await this.imgService.findOne(params.name);
+        const result = await this.imgService.findOne(params.name);
         return result;
     }
     @Get('find')
@@ -44,9 +47,9 @@ export class ImgController {
                 callback(
                     new HttpException(
                         `Unsupported file type ${file.originalname}`,
-                        HttpStatus.BAD_REQUEST
+                        HttpStatus.BAD_REQUEST,
                     ),
-                    false
+                    false,
                 );
             }
         },
@@ -56,7 +59,7 @@ export class ImgController {
             },
             filename: (req, file, callback) => {
                 callback(
-                    null,Date.now() + Math.random() + extname(file.originalname)
+                    null, Date.now() + Math.random() + extname(file.originalname),
                 );
             },
         }),
@@ -65,22 +68,23 @@ export class ImgController {
     async uploade(@UploadedFile() file) {
         if (!file) {
             throw new HttpException('请选择有效附件', HttpStatus.NOT_FOUND);
-        }else{
-            this.img1=file.filename;
-            this.imgurl=file.path;
+        } else {
+            this.img1 = file.filename;
+            this.imgurl = file.path;
         }
-        //return file;
+        // return file;
     }
     @Post('create')
     public async create(@Body() body): Promise<any> {
-        //console.log(body)
-        let img=new IMG();
-        img.count=0;
-        img.imagetType=body.imagetTypeid;
-        img.imgname=body.imgname;
-        img.img1=this.img1;
-        img.imgurl=this.imgurl;
-        console.log(img)
+        // console.log(body)
+        const img = new IMG();
+        img.count = 0;
+        img.imagetType = body.imagetTypeid;
+        img.imgname = body.imgname;
+        img.img1 = this.img1;
+        img.imgurl = this.imgurl;
+        // tslint:disable-next-line:no-console
+        console.log(img);
         return await this.imgService.create(img);
     }
 }

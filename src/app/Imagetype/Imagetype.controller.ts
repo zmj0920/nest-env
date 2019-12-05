@@ -2,6 +2,9 @@ import { Get, Controller, Post, Response, Param, HttpStatus, Request  } from '@n
 import { ImagetTypeService } from './imagetype.service';
 import { ImagetType } from '../entities/Imagetype.entity';
 
+import { ApiTags } from '@nestjs/swagger';
+
+@ApiTags('图片类型')
 @Controller('imagetType')
 export class ImagetTypeController {
     constructor(private readonly imagetTypeService: ImagetTypeService) {}

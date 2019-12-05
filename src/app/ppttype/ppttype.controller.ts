@@ -1,7 +1,8 @@
 import { Get, Controller, Post, Response, Param, HttpStatus, Request , Body } from '@nestjs/common';
 import { PPTTypeService } from './ppttype.service';
 import { PPTType } from '../entities/ppttype.entity';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('PPT类型')
 @Controller('ppttype')
 export class PPTTypeController {
     constructor(private readonly pptypeService: PPTTypeService) {}
