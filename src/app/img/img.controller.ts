@@ -21,7 +21,6 @@ import { extname } from 'path';
 import { existsSync, mkdirSync } from 'fs';
 
 @Controller('img')
-
 export class ImgController {
     img1:any;
     imgurl:any;
